@@ -18,11 +18,39 @@
     <![endif]-->
   </head>
   <body>
-    <h1>Hello, world!</h1>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+  <script>
+
+      document.addEventListener("DOMContentLoaded", function(){
+
+          if (!("indexedDB" in window)) {throw new Error('indexedDB не поддерживается')};
+          var openRequest = indexedDB.open('test', 1);
+          var db;
+          openRequest.onupgradeneeded = function(e){
+              console.log('Upgrading...');
+          };
+
+          openRequest.onsuccess = function(e){
+              console.log('Success');
+              db = e.target.result;
+          };
+
+          openRequest.onerror = function(e){
+              console.log('Error');
+              console.dir(e);
+          };
+
+
+
+      },false);
+
+
+
+  </script>
   </body>
 </html>
